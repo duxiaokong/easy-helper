@@ -21,7 +21,7 @@
             "EasyHelper\\": "src/"
         },
         "files": [
-            "src/Payment/helpers.php"
+            "src/Function/helpers.php"
         ]
     }
 }
