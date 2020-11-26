@@ -11,7 +11,7 @@
  * @param array $data 返回数据
  * @return array
  */
-function alert_info($code = 0, $msg = '', $data = [])
+function alert_info(int $code = 0, string $msg = '', array $data = [])
 {
     return ['code' => $code, 'msg' => $msg, 'data' => $data];
 }
@@ -21,7 +21,7 @@ function alert_info($code = 0, $msg = '', $data = [])
  * @param mixed $obj
  * @return array
  */
-function obj_to_array($obj)
+function obj_to_array($obj): array
 {
     if (!is_object($obj) && !is_array($obj)) {
         return [];
@@ -35,7 +35,7 @@ function obj_to_array($obj)
  * @param $field
  * @return array
  */
-function easy_get_field($row, $field)
+function easy_get_field(array $row, $field): array
 {
     if (!is_array($row)) {
         return [];
@@ -61,7 +61,7 @@ function easy_get_field($row, $field)
  * @param string $key_field
  * @return array
  */
-function easy_array_get_field($data_list, $field, $key_field = '')
+function easy_array_get_field(array $data_list, $field, string $key_field = ''): array
 {
     $list = [];
     foreach ($data_list as $item) {
@@ -81,7 +81,7 @@ function easy_array_get_field($data_list, $field, $key_field = '')
  * @param string $sort
  * @return array
  */
-function easy_array_sort($data_list, $sort_field, $sort = 'SORT_DESC')
+function easy_array_sort(array $data_list, string $sort_field, string $sort = 'SORT_DESC'): array
 {
     $sort_field_values = [];
     foreach ($data_list as $k => $item) {
@@ -97,7 +97,7 @@ function easy_array_sort($data_list, $sort_field, $sort = 'SORT_DESC')
  * @param int $mode
  * @return bool
  */
-function easy_mk_dir($dir, $mode = 0777)
+function easy_mk_dir(string $dir, $mode = 0777)
 {
     if (is_dir($dir)) {
         return true;
@@ -120,7 +120,7 @@ function easy_mk_dir($dir, $mode = 0777)
  * 递归删除目录下所有文件
  * @param string $path
  */
-function easy_del_dir($path)
+function easy_del_dir(string $path)
 {
     $op = dir($path);
     while (false != ($item = $op->read())) {
@@ -151,7 +151,7 @@ function easy_microtime()
  * @param string $url
  * @return array
  */
-function easy_url_params($url)
+function easy_url_params(string $url): array
 {
     $url_info = parse_url($url);
     $query = $url_info['query'];
@@ -170,7 +170,7 @@ function easy_url_params($url)
  * @param string $pool
  * @return bool|float|int
  */
-function easy_string_to_num($string, $pool = '')
+function easy_string_to_num(string $string, string $pool = '')
 {
     if (empty($pool)) {
         $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -194,7 +194,7 @@ function easy_string_to_num($string, $pool = '')
  * @param string $pool
  * @return string
  */
-function easy_num_to_string($num, $pool = '')
+function easy_num_to_string(int $num, string $pool = ''): string
 {
     if (empty($pool)) {
         $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -216,7 +216,7 @@ function easy_num_to_string($num, $pool = '')
  * @param string $chars 可选的 ，默认为 0123456789
  * @return string 字符串
  */
-function easy_random($length, $chars = '0123456789')
+function easy_random(int $length, string $chars = '0123456789'): string
 {
     $hash = '';
     $max = strlen($chars) - 1;
@@ -235,7 +235,7 @@ function easy_random($length, $chars = '0123456789')
  * @return bool|string
  * @throws Exception
  */
-function easy_curl_post($url, $post_data = [], $timeout = 20, $headers = [])
+function easy_curl_post(string $url, $post_data = [], int $timeout = 20, array $headers = [])
 {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -292,7 +292,7 @@ function easy_curl_post($url, $post_data = [], $timeout = 20, $headers = [])
  * @return bool|string
  * @throws Exception
  */
-function easy_curl_get($url, $get_data = [], $timeout = 20, $headers = [])
+function easy_curl_get(string $url, array $get_data = [], int $timeout = 20, array $headers = [])
 {
     if (!empty($get_data)) {
         $url .= '?' . http_build_query($get_data);
@@ -345,7 +345,7 @@ function easy_app_filter_var($var)
  * 获取请求ip
  * @return string
  */
-function easy_ip()
+function easy_ip(): string
 {
     $ip = '';
     if (getenv('HTTP_CLIENT_IP') && strcasecmp(getenv('HTTP_CLIENT_IP'), 'unknown')) {
@@ -367,7 +367,7 @@ function easy_ip()
  * @param int $precision
  * @return bool
  */
-function easy_float_eq($f1, $f2, $precision = 4)
+function easy_float_eq($f1, $f2, int $precision = 4): bool
 {
     $res = bccomp($f1, $f2, $precision);
     if ($res === 0) {
@@ -384,7 +384,7 @@ function easy_float_eq($f1, $f2, $precision = 4)
  * @param int $precision
  * @return bool
  */
-function easy_float_gt($big, $small, $precision = 4)
+function easy_float_gt($big, $small, int $precision = 4)
 {
     $res = bccomp($big, $small, $precision);
     if ($res === 1) {
@@ -440,7 +440,7 @@ function easy_trim_csv($subject)
  * @param array $row
  * @return bool
  */
-function easy_is_empty_row($row)
+function easy_is_empty_row(array $row): bool
 {
     foreach ($row as $item) {
         if (!is_object($item) && !empty(trim($item))) {
@@ -490,7 +490,7 @@ function easy_utf8_to_gbk($var)
  * @param array $allow_fields 系统允许字段
  * @return array
  */
-function easy_get_valid_field($user_fields, $allow_fields)
+function easy_get_valid_field(array $user_fields, array $allow_fields): array
 {
     $user_fields = array_map('trim', $user_fields);
     $user_fields = array_map('strtolower', $user_fields);
@@ -508,7 +508,7 @@ function easy_get_valid_field($user_fields, $allow_fields)
  * @param string $app_secret
  * @return string
  */
-function easy_make_sign($params, $app_secret)
+function easy_make_sign(array $params, string $app_secret): string
 {
     ksort($params);
     $stringToBeSigned = $app_secret;
@@ -532,7 +532,7 @@ function easy_make_sign($params, $app_secret)
  * @param string $sign_key
  * @return bool
  */
-function easy_check_sign($params, $app_secret, $sign_key = 'sign')
+function easy_check_sign(array $params, string $app_secret, string $sign_key = 'sign'): bool
 {
     $sign = trim($params[$sign_key]);
     unset($params[$sign_key]);
@@ -559,7 +559,7 @@ function easy_check_sign($params, $app_secret, $sign_key = 'sign')
  * 获取当前连接地址
  * @return string
  */
-function easy_get_current_url()
+function easy_get_current_url(): string
 {
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || (int)$_SERVER['SERVER_PORT'] === 443) || strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) == 'https' ? 'https://' : 'http://';
     return $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -583,7 +583,7 @@ function easy_p(...$vars)
  * 判断是否为手机访问
  * @return bool
  */
-function easy_is_mobile()
+function easy_is_mobile(): bool
 {
     $regex_match = '/(nokia|iphone|android|motorola|^mot\-|softbank|foma|docomo|kddi|up\.browser|up\.link|';
     $regex_match .= 'htc|dopod|blazer|netfront|helio|hosin|huawei|novarra|CoolPad|webos|techfaith|palmsource|';
@@ -598,7 +598,7 @@ function easy_is_mobile()
  * 判断是否为支付宝
  * @return bool
  */
-function easy_is_alipay()
+function easy_is_alipay(): bool
 {
     if (strpos($_SERVER['HTTP_USER_AGENT'], 'AlipayClient') !== false) {
         return true;
@@ -611,7 +611,7 @@ function easy_is_alipay()
  * @param string $user_agent
  * @return bool
  */
-function easy_is_wechat($user_agent = '')
+function easy_is_wechat($user_agent = ''): bool
 {
     if (empty($user_agent)) {
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
@@ -639,7 +639,7 @@ function easy_get_wechat_version()
  * @param string $barcode
  * @return bool
  */
-function easy_is_alipay_code($barcode)
+function easy_is_alipay_code($barcode): bool
 {
     $barcode = trim($barcode);
     if (empty($barcode)) {
@@ -656,7 +656,7 @@ function easy_is_alipay_code($barcode)
  * @param string $barcode
  * @return bool
  */
-function easy_is_wechatpay_code($barcode)
+function easy_is_wechatpay_code($barcode): bool
 {
     $barcode = trim($barcode);
     if (empty($barcode)) {
@@ -673,7 +673,7 @@ function easy_is_wechatpay_code($barcode)
  * @param string $user_agent
  * @return array
  */
-function easy_get_browser_version($user_agent = '')
+function easy_get_browser_version(string $user_agent = ''): array
 {
     if (empty($user_agent)) {
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
@@ -742,7 +742,7 @@ function easy_get_browser_version($user_agent = '')
  * @param array $haystack
  * @return bool
  */
-function easy_in_array($needles, $haystack)
+function easy_in_array($needles, array $haystack): bool
 {
     if (!is_array($needles)) {
         return in_array($needles, $haystack);
@@ -761,7 +761,7 @@ function easy_in_array($needles, $haystack)
  * @param array $new_data
  * @return array
  */
-function easy_check_change_data($old_data = [], $new_data = [])
+function easy_check_change_data(array $old_data = [], array $new_data = []): array
 {
     $change_data = [];
     foreach ($old_data as $k => $item) {
@@ -777,7 +777,7 @@ function easy_check_change_data($old_data = [], $new_data = [])
  * @param array $change_data
  * @return string
  */
-function easy_get_change_str($change_data)
+function easy_get_change_str(array $change_data)
 {
     $str = '';
     unset($change_data['operate_id'], $change_data['operate_by']);
@@ -794,7 +794,7 @@ function easy_get_change_str($change_data)
  * @param string $use_field
  * @return bool|string
  */
-function easy_weight_with_use_num($data_list, $weight_field = 'weight', $use_field = 'use_num')
+function easy_weight_with_use_num(array $data_list, $weight_field = 'weight', $use_field = 'use_num')
 {
     if (empty($data_list)) {
         return false;
