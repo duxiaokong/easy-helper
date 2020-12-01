@@ -6,4 +6,4 @@
  */
 require '../vendor/autoload.php';
 $res = EasyHelper\Verify::isMobile('18510981152');
-easy_p('test');
+easy_p(1, 2, 3);

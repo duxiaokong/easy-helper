@@ -443,7 +443,8 @@ function easy_trim_csv($subject)
 function easy_is_empty_row($row)
 {
     foreach ($row as $item) {
-        if (!is_object($item) && !empty(trim($item))) {
+        $item = trim($item);
+        if (!empty($item)) {
             return false;
         }
     }
@@ -567,10 +568,10 @@ function easy_get_current_url()
 
 /**
  * 打印信息
- * @param mixed ...$vars
  */
-function easy_p(...$vars)
+function easy_p()
 {
+    $vars = func_get_args();
     foreach ($vars as $var) {
         echo '<pre>';
         print_r($var);
